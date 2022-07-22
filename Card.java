@@ -21,6 +21,10 @@ public class Card {
         return cost;
     }
 
+    public boolean isAce() {
+        return value == 'A';
+    }
+
     @Override
     public String toString() {
         if (value != 'D') {

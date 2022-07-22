@@ -8,6 +8,10 @@ public class Dealer extends Participant {
         System.out.println(cards.peekFirst());
     }
 
+    public boolean isFirstCardAce() {
+        return cards.peekFirst().isAce();
+    }
+
     @Override
     public void showCards() {
         System.out.print("Dealer cards: ");

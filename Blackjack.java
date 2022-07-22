@@ -109,6 +109,10 @@ public class Blackjack {
     }
 
     private boolean offerSurrender() {
+        if (dealer.isFirstCardAce()) {
+            return false;
+        }
+
         System.out.print("\nDo you want to surrender(Y/n): ");
         if (in.next().equals("Y")) {
             player.takeMoney(curBet/2);
