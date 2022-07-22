@@ -65,6 +65,7 @@ public class Blackjack {
 
 
             if (offerGameEnd()) {break;}
+            foldCards();
             gameNumber++;
         }
 
@@ -93,6 +94,11 @@ public class Blackjack {
         player.takeCard(deck.giveCard());
         dealer.takeCard(deck.giveCard());
         dealer.takeCard(deck.giveCard());
+    }
+
+    private void foldCards() {
+        player.foldCards();
+        dealer.foldCards();
     }
 
     private boolean offerGameEnd() {
