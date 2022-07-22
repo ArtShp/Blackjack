@@ -7,7 +7,7 @@ public class Card {
         this.suit = suit;
         this.value = value;
         try {
-            this.cost = value - '0';
+            this.cost = Integer.parseInt(value+"");
         } catch (NumberFormatException e) {
             if (value != 'A') {
                 this.cost = 10;

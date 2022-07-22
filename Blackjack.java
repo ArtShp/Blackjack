@@ -141,6 +141,10 @@ public class Blackjack {
     }
 
     private void continueGame() {
+        if (player.checkSplit()) {
+            
+        } else {
 
+        }
     }
 }
