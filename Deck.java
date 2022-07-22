@@ -19,4 +19,8 @@ public class Deck {
     public LinkedList<Card> getCards() {
         return cards;
     }
+
+    public Card giveCard() {
+        return cards.pollLast();
+    }
 }

@@ -3,6 +3,7 @@ public class Player extends Participant {
     private long money;
 
     public Player(String name, long money) {
+        super();
         this.name = name;
         this.money = money;
     }
@@ -13,5 +14,11 @@ public class Player extends Participant {
 
     public long getMoney() {
         return money;
+    }
+
+    @Override
+    public void showCards() {
+        System.out.print("Your cards:  ");
+        super.showCards();
     }
 }
