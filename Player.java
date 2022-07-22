@@ -21,4 +21,8 @@ public class Player extends Participant {
         System.out.print("Your cards:  ");
         super.showCards();
     }
+
+    public void placeBet(int bet) {
+        money -= bet;
+    }
 }

@@ -5,6 +5,7 @@ public class Blackjack {
     private Player player;
     private Deck deck;
 
+    private int curBet;
     private int minBet;
     private int maxBet;
 
@@ -46,7 +47,14 @@ public class Blackjack {
         int gameNumber = 1;
 
         while (true) {
-            System.out.printf("\n----------GAME %d----------\n\n", gameNumber);
+            if (!checkMoney()) {
+                System.out.println("\nYou have not enough money to play!");
+                break;
+            }
+
+            System.out.printf("\n----------GAME %d----------\n", gameNumber);
+
+            placeBet();
 
             deck = new Deck();
 
@@ -58,10 +66,27 @@ public class Blackjack {
             player.showCards();
             dealer.showFirstCard();
 
-            
-
             gameNumber++;
             break;
         }
+
+        System.out.println("----------GAME OVER----------");
+    }
+
+    private boolean checkMoney() {
+        return player.getMoney() >= minBet;
+    }
+
+    private void placeBet() {
+        System.out.printf("\nYour balance: %d$.\n", player.getMoney());
+        System.out.printf("Enter your bet(%d - %d$): ", minBet, Math.min(player.getMoney(), maxBet));
+
+        curBet = in.nextInt();
+        while (curBet < minBet || curBet > maxBet || curBet > player.getMoney()) {
+            System.out.print("Your bet is incorrect! Try again: ");
+            curBet = in.nextInt();
+        }
+        player.placeBet(curBet);
+        System.out.printf("\nYou've bet %d$.\n\n", curBet);
     }
 }
