@@ -22,7 +22,11 @@ public class Player extends Participant {
         super.showCards();
     }
 
-    public void placeBet(int bet) {
-        money -= bet;
+    public void takeMoney(int money) {
+        this.money += money;
+    }
+
+    public void giveMoney(int money) {
+        this.money -= money;
     }
 }

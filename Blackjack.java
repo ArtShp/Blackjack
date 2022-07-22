@@ -62,7 +62,9 @@ public class Blackjack {
             player.showCards();
             dealer.showFirstCard();
 
+            if (!offerSurrender()) {
 
+            }
 
             if (offerGameEnd()) {break;}
             foldCards();
@@ -85,7 +87,7 @@ public class Blackjack {
             System.out.print("Your bet is incorrect! Try again: ");
             curBet = in.nextInt();
         }
-        player.placeBet(curBet);
+        player.giveMoney(curBet);
         System.out.printf("\nYou've bet %d$.\n\n", curBet);
     }
 
@@ -104,5 +106,16 @@ public class Blackjack {
     private boolean offerGameEnd() {
         System.out.print("\nDo you want to continue playing(y/N): ");
         return in.next().equals("N");
+    }
+
+    private boolean offerSurrender() {
+        System.out.print("\nDo you want to surrender(Y/n): ");
+        if (in.next().equals("Y")) {
+            player.takeMoney(curBet/2);
+            System.out.printf("You've surrendered and lost %d$.\n", curBet/2);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
