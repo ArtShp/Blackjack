@@ -62,8 +62,10 @@ public class Blackjack {
             player.showCards();
             dealer.showFirstCard();
 
+
+
+            if (offerGameEnd()) {break;}
             gameNumber++;
-            break;
         }
 
         System.out.println("\n----------GAME OVER----------");
@@ -91,5 +93,10 @@ public class Blackjack {
         player.takeCard(deck.giveCard());
         dealer.takeCard(deck.giveCard());
         dealer.takeCard(deck.giveCard());
+    }
+
+    private boolean offerGameEnd() {
+        System.out.print("\nDo you want to continue playing(y/N): ");
+        return in.next().equals("N");
     }
 }
