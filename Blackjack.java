@@ -65,13 +65,21 @@ public class Blackjack {
             if (!offerSurrender()) {
                 if (player.checkBlackjack()) {
                     if (dealer.isFirstCardAce()) {
-
+                        System.out.println("You have a Blackjack. Dealer has an Ace.");
+                        System.out.print("Do you want to take money now(Y/N): ");
+                        if (in.next().equals("Y")) {
+                            System.out.printf("You've received %d$.\n", curBet);
+                            player.takeMoney(curBet*2);
+                        } else {
+                            continueGame();
+                        }
                     } else {
-                        System.out.print("You have a Blackjack. ");
-                        System.out.printf("You've received %d$.", curBet*1.5);
+                        System.out.println("You have a Blackjack.");
+                        System.out.printf("You've received %d$.\n", curBet*3/2);
+                        player.takeMoney(curBet*5/2);
                     }
                 } else {
-
+                    continueGame();
                 }
             }
 
@@ -130,5 +138,9 @@ public class Blackjack {
         } else {
             return false;
         }
+    }
+
+    private void continueGame() {
+
     }
 }
