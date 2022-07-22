@@ -63,7 +63,16 @@ public class Blackjack {
             dealer.showFirstCard();
 
             if (!offerSurrender()) {
+                if (player.checkBlackjack()) {
+                    if (dealer.isFirstCardAce()) {
 
+                    } else {
+                        System.out.print("You have a Blackjack. ");
+                        System.out.printf("You've received %d$.", curBet*1.5);
+                    }
+                } else {
+
+                }
             }
 
             if (offerGameEnd()) {break;}
