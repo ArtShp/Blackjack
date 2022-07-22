@@ -57,11 +57,7 @@ public class Blackjack {
             placeBet();
 
             deck = new Deck();
-
-            player.takeCard(deck.giveCard());
-            player.takeCard(deck.giveCard());
-            dealer.takeCard(deck.giveCard());
-            dealer.takeCard(deck.giveCard());
+            giveStartCards();
 
             player.showCards();
             dealer.showFirstCard();
@@ -70,7 +66,7 @@ public class Blackjack {
             break;
         }
 
-        System.out.println("----------GAME OVER----------");
+        System.out.println("\n----------GAME OVER----------");
     }
 
     private boolean checkMoney() {
@@ -88,5 +84,12 @@ public class Blackjack {
         }
         player.placeBet(curBet);
         System.out.printf("\nYou've bet %d$.\n\n", curBet);
+    }
+
+    private void giveStartCards() {
+        player.takeCard(deck.giveCard());
+        player.takeCard(deck.giveCard());
+        dealer.takeCard(deck.giveCard());
+        dealer.takeCard(deck.giveCard());
     }
 }
