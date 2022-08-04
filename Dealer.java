@@ -1,19 +1,21 @@
-public class Dealer extends Participant {
-    public Dealer() {
+package Blackjack;
+
+class Dealer extends Participant {
+    Dealer() {
         super();
     }
 
-    public void showFirstCard() {
+    void showFirstCard() {
         System.out.print("Dealer card: ");
         System.out.println(cards.peekFirst());
     }
 
-    public boolean isFirstCardAce() {
+    boolean isFirstCardAce() {
         return cards.peekFirst().isAce();
     }
 
     @Override
-    public void showCards() {
+    void showCards() {
         System.out.print("Dealer cards: ");
         super.showCards();
     }

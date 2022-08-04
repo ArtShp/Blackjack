@@ -1,3 +1,5 @@
+package Blackjack;
+
 import java.util.Scanner;
 
 public class Blackjack {

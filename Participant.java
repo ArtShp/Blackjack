@@ -1,38 +1,40 @@
+package Blackjack;
+
 import java.util.LinkedList;
 
-public abstract class Participant {
-    protected LinkedList<Card> cards;
-    protected int aceCounter;
+abstract class Participant {
+    LinkedList<Card> cards;
+    private int aceCounter;
 
-    public Participant() {
+    Participant() {
         cards = new LinkedList<>();
         aceCounter = 0;
     }
 
-    public LinkedList<Card> getCards() {
+    LinkedList<Card> getCards() {
         return cards;
     }
 
-    public void takeCard(Card card) {
+    void takeCard(Card card) {
         if (card.isAce()) {
             aceCounter++;
         }
         cards.addLast(card);
     }
 
-    public void showCards() {
+    void showCards() {
         for (Card card : cards) {
             System.out.print(card + " ");
         }
         System.out.println();
     }
 
-    public void foldCards() {
+    void foldCards() {
         cards.clear();
         aceCounter = 0;
     }
 
-    public int getCardsSum() {
+    int getCardsSum() {
         int sum = 0;
         for (Card card : cards) {
             sum += card.getCost();
@@ -40,11 +42,11 @@ public abstract class Participant {
         return sum;
     }
 
-    public int getAceCounter() {
+    int getAceCounter() {
         return aceCounter;
     }
 
-    public boolean checkBlackjack() {
+    boolean checkBlackjack() {
         return getCardsSum() == 21 && cards.size() == 2;
     }
 }

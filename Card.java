@@ -1,9 +1,11 @@
-public class Card {
+package Blackjack;
+
+class Card {
     private final char suit;
     private final char value;
     private int cost;
 
-    public Card(char suit, char value) {
+    Card(char suit, char value) {
         this.suit = suit;
         this.value = value;
         try {
@@ -17,11 +19,11 @@ public class Card {
         }
     }
 
-    public int getCost() {
+    int getCost() {
         return cost;
     }
 
-    public boolean isAce() {
+    boolean isAce() {
         return value == 'A';
     }
 
