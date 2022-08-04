@@ -32,7 +32,9 @@ class Player extends Participant {
         this.money -= money;
     }
 
+    /*
     boolean checkSplit() {
         return cards.peekFirst().getCost() == cards.peekLast().getCost();
     }
+    */
 }
