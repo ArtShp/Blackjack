@@ -31,10 +31,4 @@ class Player extends Participant {
     void giveMoney(int money) {
         this.money -= money;
     }
-
-    /*
-    boolean checkSplit() {
-        return cards.peekFirst().getCost() == cards.peekLast().getCost();
-    }
-    */
 }

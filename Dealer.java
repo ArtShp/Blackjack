@@ -7,11 +7,11 @@ class Dealer extends Participant {
 
     void showFirstCard() {
         System.out.print("Dealer card: ");
-        System.out.println(cards.peekFirst());
+        System.out.println(cards.get(0));
     }
 
     boolean isFirstCardAce() {
-        return cards.peekFirst().isAce();
+        return cards.get(0).isAce();
     }
 
     @Override

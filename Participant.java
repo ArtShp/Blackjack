@@ -1,25 +1,22 @@
 package Blackjack;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 abstract class Participant {
-    LinkedList<Card> cards;
+    List<Card> cards;
     private int aceCounter;
 
     Participant() {
-        cards = new LinkedList<>();
+        cards = new ArrayList<>(10);
         aceCounter = 0;
-    }
-
-    LinkedList<Card> getCards() {
-        return cards;
     }
 
     void takeCard(Card card) {
         if (card.isAce()) {
             aceCounter++;
         }
-        cards.addLast(card);
+        cards.add(card);
     }
 
     void showCards() {
