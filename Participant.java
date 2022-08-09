@@ -38,17 +38,13 @@ abstract class Participant {
             sum += card.getCost();
         }
 
-        int aceCounter = getAceCounter();
-        while (sum > 21 && aceCounter > 0) {
+        int acesAmount = this.aceCounter;
+        while (sum > 21 && acesAmount > 0) {
             sum -= 10;
-            aceCounter--;
+            acesAmount--;
         }
 
         return sum;
-    }
-
-    int getAceCounter() {
-        return aceCounter;
     }
 
     boolean checkBlackjack() {

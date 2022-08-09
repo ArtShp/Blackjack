@@ -14,7 +14,7 @@ public class Blackjack {
     private Scanner in;
 
     public void startGame() {
-        System.out.println("----------Blackjack----------");
+        System.out.println("----------BLACKJACK----------");
 
         setupGame();
         initPlayer();
@@ -88,7 +88,9 @@ public class Blackjack {
             gameNumber++;
         }
 
-        System.out.println("\n----------GAME OVER----------");
+        System.out.println("\n----------GAME OVER----------\n");
+        showPlayerResults();
+        System.out.println("\n----------BLACKJACK----------");
     }
 
     private boolean checkMoney() {
@@ -189,5 +191,10 @@ public class Blackjack {
                 player.winMoney(curBet);
             }
         }
+    }
+
+    private void showPlayerResults() {
+        System.out.printf("Your final balance: %d$\n", player.getMoney());
+        System.out.printf("Good bye, %s!\n", player.getName());
     }
 }
