@@ -64,25 +64,23 @@ public class Blackjack {
             player.showCards();
             dealer.showFirstCard();
 
-            if (!offerSurrender()) {
-                if (player.checkBlackjack()) {
-                    if (dealer.isFirstCardAce()) {
-                        System.out.println("You have a Blackjack. Dealer has an Ace.");
-                        System.out.print("Do you want to take money now(Y/N): ");
-                        if (in.next().equals("Y")) {
-                            System.out.printf("You've received %d$.\n", curBet);
-                            player.winMoney(curBet*2);
-                        } else {
-                            continueGame();
-                        }
+            if (player.checkBlackjack()) {
+                if (dealer.isFirstCardAce()) {
+                    System.out.println("You have a Blackjack. Dealer has first card Ace.");
+                    System.out.print("Do you want to take money now(Y/N): ");
+                    if (in.next().equals("Y")) {
+                        System.out.printf("You've received %d$.\n", curBet);
+                        player.winMoney(curBet*2);
                     } else {
-                        System.out.println("You have a Blackjack.");
-                        System.out.printf("You've received %d$.\n", curBet*3/2);
-                        player.winMoney(curBet*5/2);
+                        continueGame();
                     }
                 } else {
-                    continueGame();
+                    System.out.println("You have a Blackjack.");
+                    System.out.printf("You've received %d$.\n", curBet*3/2);
+                    player.winMoney(curBet*5/2);
                 }
+            } else {
+                continueGame();
             }
 
             if (offerGameEnd()) {break;}
@@ -127,6 +125,7 @@ public class Blackjack {
         return in.next().equals("N");
     }
 
+    /*
     private boolean offerSurrender() {
         if (dealer.isFirstCardAce()) {
             return false;
@@ -141,8 +140,10 @@ public class Blackjack {
             return false;
         }
     }
+    */
 
     private void continueGame() {
+        System.out.println();
         while (true) {
             player.showCards();
 
