@@ -68,7 +68,7 @@ public class Blackjack {
                 if (dealer.isFirstCardAce()) {
                     System.out.println("You have a Blackjack. Dealer has first card Ace.");
                     System.out.print("Do you want to take money now(Y/N): ");
-                    if (in.next().equals("Y")) {
+                    if (checkYesAnswer()) {
                         System.out.printf("You've received %d$.\n", curBet);
                         player.winMoney(curBet*2);
                     } else {
@@ -124,7 +124,7 @@ public class Blackjack {
 
     private boolean offerGameEnd() {
         System.out.print("\nDo you want to continue playing(y/N): ");
-        return in.next().equals("N");
+        return !checkYesAnswer();
     }
 
     /*
@@ -134,7 +134,7 @@ public class Blackjack {
         }
 
         System.out.print("\nDo you want to surrender(Y/n): ");
-        if (in.next().equals("Y")) {
+        if (checkYesAnswer()) {
             player.winMoney(curBet/2);
             System.out.printf("You've surrendered and lost %d$.\n", curBet/2);
             return true;
@@ -148,9 +148,9 @@ public class Blackjack {
         System.out.println();
         while (true) {
             player.showCards();
-
+            
             System.out.print("\nDo you want to take a card(y/N): ");
-            if (in.next().equals("y")) {
+            if (checkYesAnswer()) {
                 player.takeCard(deck.giveCard());
 
                 if (player.getCardsSum() > 21) {
@@ -196,5 +196,9 @@ public class Blackjack {
     private void showPlayerResults() {
         System.out.printf("Your final balance: %d$\n", player.getMoney());
         System.out.printf("Good bye, %s!\n", player.getName());
+    }
+    
+    private boolean checkYesAnswer() {
+        return in.next().compareToIgnoreCase("y") == 0;
     }
 }
