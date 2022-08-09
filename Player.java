@@ -24,11 +24,11 @@ class Player extends Participant {
         super.showCards();
     }
 
-    void takeMoney(int money) {
+    void winMoney(int money) {
         this.money += money;
     }
 
-    void giveMoney(int money) {
+    void looseMoney(int money) {
         this.money -= money;
     }
 }

@@ -14,9 +14,6 @@ public class Blackjack {
     private Scanner in;
 
     public void startGame() {
-        in = new Scanner(System.in);
-        dealer = new Dealer();
-
         System.out.println("----------Blackjack----------");
 
         setupGame();
@@ -29,6 +26,9 @@ public class Blackjack {
     }
 
     private void setupGame() {
+        in = new Scanner(System.in);
+        dealer = new Dealer();
+
         System.out.print("Enter the minimum bet($): ");
         minBet = in.nextInt();
         System.out.print("Enter the maximum bet($): ");
@@ -71,14 +71,14 @@ public class Blackjack {
                         System.out.print("Do you want to take money now(Y/N): ");
                         if (in.next().equals("Y")) {
                             System.out.printf("You've received %d$.\n", curBet);
-                            player.takeMoney(curBet*2);
+                            player.winMoney(curBet*2);
                         } else {
                             continueGame();
                         }
                     } else {
                         System.out.println("You have a Blackjack.");
                         System.out.printf("You've received %d$.\n", curBet*3/2);
-                        player.takeMoney(curBet*5/2);
+                        player.winMoney(curBet*5/2);
                     }
                 } else {
                     continueGame();
@@ -106,7 +106,7 @@ public class Blackjack {
             System.out.print("Your bet is incorrect! Try again: ");
             curBet = in.nextInt();
         }
-        player.giveMoney(curBet);
+        player.looseMoney(curBet);
         System.out.printf("\nYou've bet %d$.\n\n", curBet);
     }
 
@@ -134,7 +134,7 @@ public class Blackjack {
 
         System.out.print("\nDo you want to surrender(Y/n): ");
         if (in.next().equals("Y")) {
-            player.takeMoney(curBet/2);
+            player.winMoney(curBet/2);
             System.out.printf("You've surrendered and lost %d$.\n", curBet/2);
             return true;
         } else {
@@ -162,7 +162,32 @@ public class Blackjack {
         }
 
         System.out.println("\nNow is dealer's turn.");
-        while (dealer.getCardsSum() - dealer.getAceCounter()*10 < 17) {
+
+        /*
+        while (true) {
+            dealer.showCards();
+            int currentCardsSum = dealer.getCardsSum();
+            int currentAceAmount = dealer.getAceCounter();
+
+            if (currentCardsSum >= 17) {
+                if (currentCardsSum - currentAceAmount*10 > 21) {
+
+                    if (currentAceAmount > 0) {
+                        currentAceAmount--;
+                        currentCardsSum -= 10;
+                    } else break;
+
+                    break;
+                } else {
+                    ;
+                }
+
+            }
+            dealer.takeCard(deck.giveCard());
+        }
+        */
+
+        while (dealer.getCardsSum() - dealer.getAceCounter()*10 < 21 && dealer.getCardsSum() < 17) {
             dealer.takeCard(deck.giveCard());
         }
 
@@ -172,7 +197,7 @@ public class Blackjack {
         if (dealer.getCardsSum() - dealer.getAceCounter()*10 > 21) {
             System.out.println("\nDealer has an overflow(more than 21)!");
             System.out.printf("You have won and earned %d$.\n", curBet);
-            player.takeMoney(curBet*2);
+            player.winMoney(curBet*2);
         } else {
             int playerCardsSum = player.getCardsSum();
             int playerAcesAmount = player.getAceCounter();
@@ -180,23 +205,28 @@ public class Blackjack {
             int dealerCardsSum = dealer.getCardsSum();
             int dealerAcesAmount = dealer.getAceCounter();
 
-            while (playerAcesAmount > 0) {
-                playerCardsSum -= 10;
-                playerAcesAmount--;
+            while (playerCardsSum > 21) {
+                if (playerAcesAmount > 0) {
+                    playerCardsSum -= 10;
+                    playerAcesAmount--;
+                } else break;
             }
-            while (dealerAcesAmount > 0) {
-                dealerCardsSum -= 10;
-                dealerAcesAmount--;
+
+            while (dealerCardsSum > 21) {
+                if (dealerAcesAmount > 0) {
+                    dealerCardsSum -= 10;
+                    dealerAcesAmount--;
+                } else break;
             }
 
             if (playerCardsSum > dealerCardsSum) {
                 System.out.printf("\nYou have won and earned %d$.\n", curBet);
-                player.takeMoney(curBet*2);
+                player.winMoney(curBet*2);
             } else if (playerCardsSum < dealerCardsSum) {
                 System.out.printf("\nYou have lost and lost %d$.\n", curBet);
             } else {
                 System.out.println("\nYou have a draw and your bet was returned.");
-                player.takeMoney(curBet);
+                player.winMoney(curBet);
             }
         }
     }
