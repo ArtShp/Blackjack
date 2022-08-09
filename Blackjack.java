@@ -93,62 +93,11 @@ public class Blackjack {
         System.out.println("\n----------BLACKJACK----------");
     }
 
-    private boolean checkMoney() {
-        return player.getMoney() >= minBet;
-    }
-
-    private void placeBet() {
-        System.out.printf("\nYour balance: %d$.\n", player.getMoney());
-        System.out.printf("Enter your bet(%d - %d$): ", minBet, Math.min(player.getMoney(), maxBet));
-
-        curBet = in.nextInt();
-        while (curBet < minBet || curBet > maxBet || curBet > player.getMoney()) {
-            System.out.print("Your bet is incorrect! Try again: ");
-            curBet = in.nextInt();
-        }
-        player.looseMoney(curBet);
-        System.out.printf("\nYou've bet %d$.\n\n", curBet);
-    }
-
-    private void giveStartCards() {
-        player.takeCard(deck.giveCard());
-        player.takeCard(deck.giveCard());
-        dealer.takeCard(deck.giveCard());
-        dealer.takeCard(deck.giveCard());
-    }
-
-    private void foldCards() {
-        player.foldCards();
-        dealer.foldCards();
-    }
-
-    private boolean offerGameEnd() {
-        System.out.print("\nDo you want to continue playing(y/N): ");
-        return !checkYesAnswer();
-    }
-
-    /*
-    private boolean offerSurrender() {
-        if (dealer.isFirstCardAce()) {
-            return false;
-        }
-
-        System.out.print("\nDo you want to surrender(Y/n): ");
-        if (checkYesAnswer()) {
-            player.winMoney(curBet/2);
-            System.out.printf("You've surrendered and lost %d$.\n", curBet/2);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    */
-
     private void continueGame() {
         System.out.println();
         while (true) {
             player.showCards();
-            
+
             System.out.print("\nDo you want to take a card(y/N): ");
             if (checkYesAnswer()) {
                 player.takeCard(deck.giveCard());
@@ -193,11 +142,45 @@ public class Blackjack {
         }
     }
 
+    private void placeBet() {
+        System.out.printf("\nYour balance: %d$.\n", player.getMoney());
+        System.out.printf("Enter your bet(%d - %d$): ", minBet, Math.min(player.getMoney(), maxBet));
+
+        curBet = in.nextInt();
+        while (curBet < minBet || curBet > maxBet || curBet > player.getMoney()) {
+            System.out.print("Your bet is incorrect! Try again: ");
+            curBet = in.nextInt();
+        }
+        player.looseMoney(curBet);
+        System.out.printf("\nYou've bet %d$.\n\n", curBet);
+    }
+
+    private void giveStartCards() {
+        player.takeCard(deck.giveCard());
+        player.takeCard(deck.giveCard());
+        dealer.takeCard(deck.giveCard());
+        dealer.takeCard(deck.giveCard());
+    }
+
+    private void foldCards() {
+        player.foldCards();
+        dealer.foldCards();
+    }
+
     private void showPlayerResults() {
         System.out.printf("Your final balance: %d$\n", player.getMoney());
         System.out.printf("Good bye, %s!\n", player.getName());
     }
-    
+
+    private boolean offerGameEnd() {
+        System.out.print("\nDo you want to continue playing(y/N): ");
+        return !checkYesAnswer();
+    }
+
+    private boolean checkMoney() {
+        return player.getMoney() >= minBet;
+    }
+
     private boolean checkYesAnswer() {
         return in.next().compareToIgnoreCase("y") == 0;
     }
