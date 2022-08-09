@@ -150,7 +150,7 @@ public class Blackjack {
             if (in.next().equals("y")) {
                 player.takeCard(deck.giveCard());
 
-                if (player.getCardsSum() - player.getAceCounter()*10 > 21) {
+                if (player.getCardsSum() > 21) {
                     player.showCards();
                     System.out.println("\nYou have an overflow(more than 21)!");
                     System.out.printf("You've lost and lost %d$.\n", curBet);
@@ -163,62 +163,21 @@ public class Blackjack {
 
         System.out.println("\nNow is dealer's turn.");
 
-        /*
-        while (true) {
-            dealer.showCards();
-            int currentCardsSum = dealer.getCardsSum();
-            int currentAceAmount = dealer.getAceCounter();
-
-            if (currentCardsSum >= 17) {
-                if (currentCardsSum - currentAceAmount*10 > 21) {
-
-                    if (currentAceAmount > 0) {
-                        currentAceAmount--;
-                        currentCardsSum -= 10;
-                    } else break;
-
-                    break;
-                } else {
-                    ;
-                }
-
-            }
-            dealer.takeCard(deck.giveCard());
-        }
-        */
-
-        while (dealer.getCardsSum() - dealer.getAceCounter()*10 < 21 && dealer.getCardsSum() < 17) {
+        while (dealer.getCardsSum() < 17) {
             dealer.takeCard(deck.giveCard());
         }
 
         player.showCards();
         dealer.showCards();
 
-        if (dealer.getCardsSum() - dealer.getAceCounter()*10 > 21) {
+        int playerCardsSum = player.getCardsSum();
+        int dealerCardsSum = dealer.getCardsSum();
+
+        if (dealerCardsSum > 21) {
             System.out.println("\nDealer has an overflow(more than 21)!");
             System.out.printf("You have won and earned %d$.\n", curBet);
             player.winMoney(curBet*2);
         } else {
-            int playerCardsSum = player.getCardsSum();
-            int playerAcesAmount = player.getAceCounter();
-
-            int dealerCardsSum = dealer.getCardsSum();
-            int dealerAcesAmount = dealer.getAceCounter();
-
-            while (playerCardsSum > 21) {
-                if (playerAcesAmount > 0) {
-                    playerCardsSum -= 10;
-                    playerAcesAmount--;
-                } else break;
-            }
-
-            while (dealerCardsSum > 21) {
-                if (dealerAcesAmount > 0) {
-                    dealerCardsSum -= 10;
-                    dealerAcesAmount--;
-                } else break;
-            }
-
             if (playerCardsSum > dealerCardsSum) {
                 System.out.printf("\nYou have won and earned %d$.\n", curBet);
                 player.winMoney(curBet*2);

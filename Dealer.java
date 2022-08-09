@@ -7,7 +7,8 @@ class Dealer extends Participant {
 
     void showFirstCard() {
         System.out.print("Dealer card: ");
-        System.out.println(cards.get(0));
+        System.out.print(cards.get(0));
+        System.out.printf(" - (%d)\n", cards.get(0).getCost());
     }
 
     boolean isFirstCardAce() {

@@ -23,7 +23,8 @@ abstract class Participant {
         for (Card card : cards) {
             System.out.print(card + " ");
         }
-        System.out.println();
+        System.out.printf("- (%d)\n", getCardsSum());
+        //System.out.println();
     }
 
     void foldCards() {
@@ -36,6 +37,13 @@ abstract class Participant {
         for (Card card : cards) {
             sum += card.getCost();
         }
+
+        int aceCounter = getAceCounter();
+        while (sum > 21 && aceCounter > 0) {
+            sum -= 10;
+            aceCounter--;
+        }
+
         return sum;
     }
 
